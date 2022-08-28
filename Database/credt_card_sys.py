@@ -68,10 +68,12 @@ def join_loaded_tables():
     credit_card = load_sql_table('credit_data', 'cdw_sapp_credit_card')
     customer = load_sql_table('branch_data', 'cdw_sapp_customer')
     # todo join dataframes
-    joined_table = customer.join(credit_card, ["CREDIT_CARD_NO"]) \
-        .join(branch, credit_card["BRANCH_CODE"] == branch["BRANCH_CODE"])
+    '''joined_table = customer.join(credit_card, ["CREDIT_CARD_NO"]) \
+        .join(branch, credit_card["BRANCH_CODE"] == branch["BRANCH_CODE"])'''
+    joined_table = branch.join(credit_card,['BRANCH_CODE'])
+    joined_table = joined_table.join(customer,['CREDIT_CARD_NO'])
     return joined_table
 
 
 df = join_loaded_tables()
-df.show(500)
+df.show(1)

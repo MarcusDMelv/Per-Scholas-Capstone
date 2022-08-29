@@ -1,7 +1,7 @@
 from pyspark.sql.functions import regexp_replace
 
 # todo load dataframe
-from Database.credt_card_sys import df  # load df
+from Credit_Card_Sys.credt_card_sys import df  # load df
 
 
 # TODO 1) Used to check the existing account details of a customer.

@@ -22,13 +22,13 @@ def export_to_sql():
     # unpack tuple
     branch, credit, customer = read_json_data()  # adjust if adding new data
     # todo branch_data
-    branch.write.format("jdbc") \
+    '''branch.write.format("jdbc") \
         .mode("append") \
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_BRANCH") \
         .option("user", "root") \
         .option("password", "Pass1234") \
-        .save()
+        .save()'''
     # todo credit_data
     credit.write.format("jdbc") \
         .mode("append") \
@@ -38,13 +38,13 @@ def export_to_sql():
         .option("password", "Pass1234") \
         .save()
     # todo customer_data
-    customer.write.format("jdbc") \
+    '''customer.write.format("jdbc") \
         .mode("append") \
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_CUSTOMER") \
         .option("user", "root") \
         .option("password", "Pass1234") \
-        .save()
+        .save()'''
 
 
 # TODO Populate SQL database

@@ -1,5 +1,5 @@
 # todo load dataframe
-from Database.credt_card_sys import df  # load df
+from Credit_Card_Sys.credt_card_sys import df  # load df
 
 
 # todo 1) Used to display the transactions made by customers living in a given zip code for a given month and year.

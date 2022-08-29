@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
-import time
 # todo load dataframe
-from Database.credt_card_sys import df  # load df
+from Credit_Card_Sys.credt_card_sys import df  # load df
 
 
 # pandas_df = df.toPandas()
@@ -14,8 +13,7 @@ def module_one():
     pandas_df = mod1.toPandas()
     plt.rcParams["figure.figsize"] = [8, 4]
     plt.rcParams["figure.autolayout"] = True
-    pandas_df['TRANSACTION_TYPE'].value_counts() \
-        .plot()
+    plt.plot(pandas_df['TRANSACTION_TYPE'].value_counts(),ls='-.', c='r', marker='o')
     plt.title('Which Transaction Occurs Most Often')
     plt.ylabel('Number of Transaction')
     plt.xlabel('Transaction Type')
@@ -25,13 +23,13 @@ def module_one():
 
 # TODO 2) Find and plot states, showing which state has the highest number of customers.
 def module_two():
+
     print('Module Two:\n\tFind and plot states, showing which state has the highest number of customers.\n')
     mod2 = df.select('CUST_STATE')
     pandas_df = mod2.toPandas()
     plt.rcParams["figure.figsize"] = [15, 5]
-    plt.rcParams["figure.autolayout"] = True
-    pandas_df['CUST_STATE'].value_counts() \
-        .plot()
+    plt.rcParams["figure.autolayout"] = False
+    plt.plot(pandas_df['CUST_STATE'].value_counts(), ls='-', c='g', marker='o')
     plt.title('Which State Has Highest Number Of Customers')
     plt.ylabel('Number of Customers')
     plt.xlabel('State Abbrev.')
@@ -49,9 +47,9 @@ def module_three():
     pandas_df = pandas_df.groupby('CUST_EMAIL')['TRANSACTION_VALUE'].sum().reset_index()
     pandas_df = pandas_df.sort_values(by=['TRANSACTION_VALUE'], ascending=False)
     pandas_df = pandas_df[:20]
-    plt.rcParams["figure.figsize"] = [40, 5]
+    plt.rcParams["figure.figsize"] = [35, 5]
     plt.rcParams["figure.autolayout"] = True
-    plt.plot(pandas_df['CUST_EMAIL'], pandas_df['TRANSACTION_VALUE'])
+    plt.plot(pandas_df['CUST_EMAIL'], pandas_df['TRANSACTION_VALUE'],ls=':', c='limegreen', marker='o')
     plt.xticks(pandas_df['CUST_EMAIL'])
     plt.title('Which Customer Has The Highest Transaction Amount.')
     plt.ylabel('Transaction Amount')
@@ -70,7 +68,7 @@ def module_four():
     pandas_df = pandas_df.sort_values(by=['MONTH'], ascending=False)
     plt.rcParams["figure.figsize"] = [15, 5]
     plt.rcParams["figure.autolayout"] = True
-    plt.plot(pandas_df['MONTH'], pandas_df['TRANSACTION_VALUE'])
+    plt.plot(pandas_df['MONTH'], pandas_df['TRANSACTION_VALUE'],ls='-', c='g',lw='3', marker='o')
     plt.title('Which Month Has Highest Number Of Transactions')
     plt.ylabel('Transaction Amount')
     plt.xlabel('Month by Number')
@@ -92,7 +90,7 @@ def module_five():
     print(pandas_df)
     plt.rcParams["figure.figsize"] = [15, 5]
     plt.rcParams["figure.autolayout"] = True
-    plt.plot(pandas_df['BRANCH_CODE'], pandas_df['TRANSACTION_VALUE'])
+    plt.plot(pandas_df['BRANCH_CODE'], pandas_df['TRANSACTION_VALUE'],ls='-', c='purple', marker='o')
     plt.xticks(pandas_df['BRANCH_CODE'])
     plt.title('Which Branch Has Highest Number Of Healthcare Transactions')
     plt.ylabel('Transaction Amount')

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 # todo load dataframe
 from Credit_Card_Sys.credt_card_sys import df  # load df
 
-
+df = df
 # pandas_df = df.toPandas()
 
 
@@ -60,16 +60,17 @@ def module_three():
 
 # TODO 4) Find and plot the top three months with the largest transaction data.
 def module_four():
-    print('Module Two:\n\tFind and plot the top three months with the largest transaction data.\n')
+    print('Module Four:\n\tFind and plot the top three months with the largest transaction data.\n')
     mod4 = df.select('MONTH', 'TRANSACTION_VALUE')
     pandas_df = mod4.toPandas()
     pandas_df = pandas_df.groupby('MONTH')['TRANSACTION_VALUE'].sum().reset_index()
     pandas_df = pandas_df.sort_values(by=['TRANSACTION_VALUE'], ascending=False)
     pandas_df = pandas_df.sort_values(by=['MONTH'], ascending=False)
+    pandas_df = pandas_df[:3]
     plt.rcParams["figure.figsize"] = [15, 5]
     plt.rcParams["figure.autolayout"] = True
     plt.plot(pandas_df['MONTH'], pandas_df['TRANSACTION_VALUE'],ls='-', c='g',lw='3', marker='o')
-    plt.title('Which Month Has Highest Number Of Transactions')
+    plt.title('Top Three Months With Highest Number Of Transactions')
     plt.ylabel('Transaction Amount')
     plt.xlabel('Month by Number')
     plt.text(10, 202584, 'October has the most transactions: $202583.89')  # see note below
@@ -79,7 +80,7 @@ def module_four():
 # TODO 5) Find and plot each branches healthcare transactions, showing which branch  processed the highest total
 #  dollar value of healthcare transactions.
 def module_five():
-    print('Module Two:\n\tFind and plot each branches healthcare transactions, showing which branch  processed the '
+    print('Module Five:\n\tFind and plot each branches healthcare transactions, showing which branch  processed the '
           'highest total dollar value of healthcare transactions.\n')
     mod5 = df.select('BRANCH_CODE', 'TRANSACTION_VALUE').filter(df.TRANSACTION_TYPE == 'Healthcare')
     pandas_df = mod5.toPandas()
@@ -98,9 +99,10 @@ def module_five():
     plt.text(25, 4371, 'Branch code: 25 has the most Healthcare transactions: $ 4370.18')  # see note below
     plt.show()
 
-
-module_one()
-module_two()
-module_three()
-module_four()
-module_five()
+# export
+def run_dav_module():
+    module_one()
+    module_two()
+    module_three()
+    module_four()
+    module_five()

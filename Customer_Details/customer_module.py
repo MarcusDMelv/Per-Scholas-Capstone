@@ -1,7 +1,12 @@
 from pyspark.sql.functions import regexp_replace
 
 # todo load dataframe
-from Credit_Card_Sys.credt_card_sys import df  # load df
+from Credit_Card_Sys.credt_card_sys import df,customer_sample  # load ccs df
+
+# show customer sample
+customer_sample = customer_sample
+# load dataframe
+df = df
 
 
 # TODO 1) Used to check the existing account details of a customer.
@@ -10,21 +15,23 @@ def module_one():
           'SSN)\n')
     ccn = input('Enter customers credit card number: ')
     mod1 = df.select('SSN', 'FIRST_NAME', 'LAST_NAME', 'MIDDLE_NAME', 'CUST_COUNTRY', 'CUST_CITY', 'CUST_EMAIL',
-                     'CUST_PHONE', 'STREET_NAME', 'CUST_STATE', 'CUST_ZIP', 'CREDIT_CARD_NO').filter(df.CREDIT_CARD_NO == ccn)
+                     'CUST_PHONE', 'STREET_NAME', 'CUST_STATE', 'CUST_ZIP', 'CREDIT_CARD_NO').filter(
+        df.CREDIT_CARD_NO == ccn)
     mod1.distinct().show()
 
 
 # TODO 2) Used to modify the existing account details of a customer.
 def module_two():
-    print('Module Two:\n\tView existing account details of a customer by entering customers credit card number\n')
+    print('Module Two:\n\tModify existing account details of a customer by entering customers credit card number\n')
     ccn = input('Enter customers credit card number: ')
     mod2 = df.select('SSN', 'FIRST_NAME', 'LAST_NAME', 'MIDDLE_NAME', 'CUST_COUNTRY', 'CUST_CITY', 'CUST_EMAIL',
-                     'CUST_PHONE', 'STREET_NAME', 'CUST_STATE', 'CUST_ZIP', 'CREDIT_CARD_NO').filter(df.CREDIT_CARD_NO == ccn)
+                     'CUST_PHONE', 'STREET_NAME', 'CUST_STATE', 'CUST_ZIP', 'CREDIT_CARD_NO').filter(
+        df.CREDIT_CARD_NO == ccn)
     mod2.distinct().show()
     # todo ask user what to modify
-    column = input('Enter Column Name: ')
+    column = input('Enter Column name value is stored in: ')
     replace = input('Enter current value from the column {}: '.format(column))
-    new_entry = input('Enter new value: ')
+    new_entry = input('Enter new value to replace old value: ')
     mod2.withColumn(column, regexp_replace(column, replace, new_entry)).distinct() \
         .show()
 
@@ -57,7 +64,7 @@ def module_four():
     end_month = input('Enter END Month: ')
     end_year = input('Enter END Year: ')
 
-    mod4 = df.select('CREDIT_CARD_NO','YEAR', 'MONTH', 'DAY', 'TRANSACTION_TYPE', 'TRANSACTION_VALUE'). \
+    mod4 = df.select('CREDIT_CARD_NO', 'YEAR', 'MONTH', 'DAY', 'TRANSACTION_TYPE', 'TRANSACTION_VALUE'). \
         filter(df.CREDIT_CARD_NO == ccn). \
         filter(df.YEAR >= start_year). \
         filter(df.MONTH >= start_month). \
@@ -65,11 +72,12 @@ def module_four():
         filter(df.YEAR <= end_year). \
         filter(df.MONTH <= end_month). \
         filter(df.DAY <= end_day). \
-        sort(df.YEAR.desc(),df.MONTH.desc(),df.DAY.desc())
+        sort(df.YEAR.desc(), df.MONTH.desc(), df.DAY.desc())
     mod4.show(100)
 
 
-module_one()
-module_two()
-module_three()
-module_four()
+def run_customer_module():
+    module_one()
+    module_two()
+    module_three()
+    module_four()

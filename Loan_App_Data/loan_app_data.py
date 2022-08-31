@@ -19,12 +19,14 @@ def get_json_data():
 def create_pandas_df():
     data_link = 'https://raw.githubusercontent.com/platformps/LoanDataset/main/loan_data.json'
     df = pd.read_json(data_link)
+    # create csv in folder
     df.to_csv('loan_app_data.csv', index=False)  # created json file
     return df
 
 
-# just cause
+# load in spark
 def create_spark_df():
+    # load csv file from current folder
     df = spark.read.option('header', True).csv('loan_app_data.csv')
     df.printSchema()
     return df
@@ -42,5 +44,8 @@ def load_data_to_sql():
         .save()
 
 
+# load_data_to_sql()
+
 # pandas_df will be needed for DAV
+get_json_data()
 pandas_df = create_pandas_df()

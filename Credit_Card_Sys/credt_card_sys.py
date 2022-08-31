@@ -70,10 +70,12 @@ def join_loaded_tables():
     # todo join dataframes
     '''joined_table = customer.join(credit_card, ["CREDIT_CARD_NO"]) \
         .join(branch, credit_card["BRANCH_CODE"] == branch["BRANCH_CODE"])'''
-    joined_table = branch.join(credit_card,['BRANCH_CODE'])
-    joined_table = joined_table.join(customer,['CREDIT_CARD_NO'])
+    joined_table = branch.join(credit_card, ['BRANCH_CODE'])
+    joined_table = joined_table.join(customer, ['CREDIT_CARD_NO'])
     return joined_table
 
 
-df = join_loaded_tables()
-df.show(1)
+# export
+credit_card_sys_df = join_loaded_tables()
+customer_sample = credit_card_sys_df.show(1)
+df = credit_card_sys_df

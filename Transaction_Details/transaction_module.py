@@ -9,7 +9,7 @@ def module_one():
     zipcode = input('\tEnter Zipcode: ')
     year = input('\tEnter Year: ')
     month = input('\tEnter Month: ')
-    mod1 = df.select('CUST_ZIP', 'MONTH', 'DAY', 'YEAR', 'TRANSACTION_ID', 'TRANSACTION_TYPE', 'TRANSACTION_VALUE'). \
+    mod1 = df.select('FIRST_NAME','LAST_NAME','CUST_ZIP', 'MONTH', 'DAY', 'YEAR', 'TRANSACTION_ID', 'TRANSACTION_TYPE', 'TRANSACTION_VALUE').distinct(). \
         filter(df.MONTH == month). \
         filter(df.YEAR == year). \
         filter(df.CUST_ZIP == zipcode). \
@@ -39,7 +39,7 @@ def module_three():
     print("\nTotal value of branch transactions in {}".format(state))
     mod3.agg({'TRANSACTION_VALUE': 'sum'}).show()
 
-
-module_one()
-module_two()
-module_three()
+def run_transaction_module():
+    module_one()
+    module_two()
+    module_three()

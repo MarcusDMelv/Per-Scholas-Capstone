@@ -2,8 +2,10 @@ import json
 import requests
 from pyspark.sql import SparkSession
 import pandas as pd
+from Credit_Card_Sys.res.secrets import password
 
 spark = SparkSession.builder.appName('SparkApp').getOrCreate()
+password = password
 
 
 # use request to load
@@ -40,7 +42,7 @@ def load_data_to_sql():
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_loan_application") \
         .option("user", "root") \
-        .option("password", "Pass1234") \
+        .option("password", password) \
         .save()
 
 

@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
-
+from Credit_Card_Sys.res.secrets import password
 spark = SparkSession.builder.appName('SparkApp').getOrCreate()
-
+# load password for data base #
+password = password
 
 # TODO: MUST Add json file to res folder
 def load_json_data(json_file):
@@ -27,7 +28,7 @@ def export_to_sql():
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_BRANCH") \
         .option("user", "root") \
-        .option("password", "Pass1234") \
+        .option("password", password) \
         .save()
     # todo credit_data
     credit.write.format("jdbc") \
@@ -35,7 +36,7 @@ def export_to_sql():
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_CREDIT_CARD") \
         .option("user", "root") \
-        .option("password", "Pass1234") \
+        .option("password", password) \
         .save()
     # todo customer_data
     customer.write.format("jdbc") \
@@ -43,12 +44,13 @@ def export_to_sql():
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_CUSTOMER") \
         .option("user", "root") \
-        .option("password", "Pass1234") \
+        .option("password", password) \
         .save()
 
 
 # TODO Populate SQL database
 # export_to_sql()  # uncomment to populate sql database
+
 
 # TODO Load data from table in SQL database
 def load_sql_table(df_name, table_name):
@@ -57,7 +59,7 @@ def load_sql_table(df_name, table_name):
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone." + table_name + "") \
         .option("user", "root") \
-        .option("password", "Pass1234") \
+        .option("password", password) \
         .load()
     return df_name
 

@@ -47,5 +47,6 @@ def load_data_to_sql():
 # load_data_to_sql()
 
 # pandas_df will be needed for DAV
+#export to loan_app_dav.py
 get_json_data()
 pandas_df = create_pandas_df()

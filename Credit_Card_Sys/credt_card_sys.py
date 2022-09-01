@@ -22,29 +22,29 @@ def export_to_sql():
     # unpack tuple
     branch, credit, customer = read_json_data()  # adjust if adding new data
     # todo branch_data
-    '''branch.write.format("jdbc") \
-        .mode("append") \
+    branch.write.format("jdbc") \
+        .mode("overwrite") \
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_BRANCH") \
         .option("user", "root") \
         .option("password", "Pass1234") \
-        .save()'''
+        .save()
     # todo credit_data
     credit.write.format("jdbc") \
-        .mode("append") \
+        .mode("overwrite") \
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_CREDIT_CARD") \
         .option("user", "root") \
         .option("password", "Pass1234") \
         .save()
     # todo customer_data
-    '''customer.write.format("jdbc") \
-        .mode("append") \
+    customer.write.format("jdbc") \
+        .mode("overwrite") \
         .option("url", "jdbc:mysql://localhost:3307/creditcard_capstone") \
         .option("dbtable", "creditcard_capstone.CDW_SAPP_CUSTOMER") \
         .option("user", "root") \
         .option("password", "Pass1234") \
-        .save()'''
+        .save()
 
 
 # TODO Populate SQL database
@@ -75,7 +75,6 @@ def join_loaded_tables():
     return joined_table
 
 
-# export
+# export to customer_module.py,analysis_visualization.py,transaction_module.py
 credit_card_sys_df = join_loaded_tables()
 customer_sample = credit_card_sys_df.show(1)
-df = credit_card_sys_df

@@ -1,16 +1,17 @@
 from pyspark.sql.functions import regexp_replace
 
-# todo load dataframe
-from Credit_Card_Sys.credt_card_sys import df,customer_sample  # load ccs df
+# todo import credit card df
+from Credit_Card_Sys.credt_card_sys import credit_card_sys_df,customer_sample  # load ccs df
 
 # show customer sample
 customer_sample = customer_sample
 # load dataframe
-df = df
+df = credit_card_sys_df
 
 
 # TODO 1) Used to check the existing account details of a customer.
 def module_one():
+    # todo get user input
     print('Module One:\n\tView existing account details of a customer by entering customer Social Security Number ('
           'SSN)\n')
     ccn = input('Enter customers credit card number: ')
@@ -22,6 +23,7 @@ def module_one():
 
 # TODO 2) Used to modify the existing account details of a customer.
 def module_two():
+    # todo get user input
     print('Module Two:\n\tModify existing account details of a customer by entering customers credit card number\n')
     ccn = input('Enter customers credit card number: ')
     mod2 = df.select('SSN', 'FIRST_NAME', 'LAST_NAME', 'MIDDLE_NAME', 'CUST_COUNTRY', 'CUST_CITY', 'CUST_EMAIL',
@@ -30,7 +32,7 @@ def module_two():
     mod2.distinct().show()
     # todo ask user what to modify
     column = input('Enter Column name value is stored in: ')
-    replace = input('Enter current value from the column {}: '.format(column))
+    replace = input('Enter current value from the column {}: '.format(column))  # replace with current value
     new_entry = input('Enter new value to replace old value: ')
     mod2.withColumn(column, regexp_replace(column, replace, new_entry)).distinct() \
         .show()
@@ -38,6 +40,7 @@ def module_two():
 
 # TODO 3) Used to generate a monthly bill for a credit card number for a given month and year.
 def module_three():
+    # todo get user input
     print('Module Three:\n\tGenerate a monthly bill for a credit card number for a given month and year')
     ccn = input('Enter credit card number: ')
     month = input('Enter month: ')
@@ -55,6 +58,7 @@ def module_three():
 # TODO 4) Used to display the transactions made by a customer between two dates. Order by year, month, and day in
 #  descending order
 def module_four():
+    # todo get user input
     print('Module Four:\n\tDisplay the transactions made by a customer between two dates.')
     ccn = input('Enter customers credit card number: ')
     start_day = input('Enter START Day: ')
@@ -75,9 +79,13 @@ def module_four():
         sort(df.YEAR.desc(), df.MONTH.desc(), df.DAY.desc())
     mod4.show(100)
 
-
+# export to main.py
 def run_customer_module():
     module_one()
     module_two()
     module_three()
     module_four()
+module_one()
+module_two()
+module_three()
+module_four()

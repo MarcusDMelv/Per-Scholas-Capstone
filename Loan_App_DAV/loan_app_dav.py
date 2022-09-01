@@ -27,7 +27,7 @@ def module_one():
     new_df = new_df.groupby(['Income', 'Gender'])['Application_Status'].count()
     print(new_df)
     new_df.plot(kind='bar', title='App Approvals: Married Men vs Married Women| Based on income ranges.'
-                , ylabel='Application Approved', xlabel='Income Range/Gender', figsize=(12, 12),color= 'purple')
+                , ylabel='Application Approved', xlabel='Income Range/Gender', figsize=(12, 12), color='purple')
     plt.show()
 
 
@@ -42,7 +42,7 @@ def module_two():
     new_df = new_df.groupby(['Property_Area'])['Application_Status'].count()
     print(new_df)
     new_df.plot(kind='bar', title='App Approvals: Difference in application approvals| Based on Property Area'
-                , ylabel='Application Approved', xlabel='Property_Area', figsize=(12, 12),color= 'orange')
+                , ylabel='Application Approved', xlabel='Property_Area', figsize=(12, 12), color='orange')
     plt.show()
 
     # Show Plot
@@ -53,20 +53,25 @@ def module_three():
     print(
         'Module Three:\n\tCreate a multi-bar plot that shows the total number of approved applications per each '
         'application demographic.\n')
-    data = df[['Income', 'Application_Status','Gender','Education']]
+    data = df[['Income', 'Application_Status', 'Gender', 'Education']]
     # edit inputs
     # Query by one condition
     data = data.query("Application_Status == 'Y' ")
-    data = data.groupby(['Income','Gender','Education'])['Application_Status'].count()
+    data = data.groupby(['Income', 'Gender', 'Education'])['Application_Status'].count()
     print(data)
     data.plot(kind='bar', title='App Approvals: Number of approved applications | Per each application demographic'
-              , ylabel='Applications Approved', xlabel='Demographic:Income Range / Gender/ College', figsize=(12, 12),color= 'green')
+              , ylabel='Applications Approved', xlabel='Demographic:Income Range / Gender/ College', figsize=(12, 12),
+              color='green')
     plt.show()
 
     # Show Plot
 
 
+# export to main.py
 def run_loan_app_dav_module():
     module_one()
     module_two()
     module_three()
+module_one()
+module_two()
+module_three()
